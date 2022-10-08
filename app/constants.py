@@ -15,7 +15,7 @@ class ResponseMessage(Enum):
     """Response messages."""
 
     TRAINING_SUCCESS = "Training Successful"
-    MODEL_DOESNT_EXIST = "The model version: {model_version} doesn't exist. Please use an available model version."
+    MODEL_DOESNT_EXIST = "The model version: '{model_version}' doesn't exist. Please use an available model version."
 
 
 class APIConstants(Enum):

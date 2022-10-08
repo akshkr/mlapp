@@ -85,20 +85,20 @@ async def train(
 async def evaluate(
     model_version: str,
     file: UploadFile = File(
-        alias="training-file",
-        title="Training image dataset",
+        alias="evaluation-file",
+        title="Evaluation image dataset",
     ),
     db: Session = Depends(get_db),
 ):
     """Evaluate api."""
-    model_id = get_model_id(db, model_version)
-    if not model_id:
+    model_query = get_model_id(db, model_version)
+
+    if not model_query:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=ResponseMessage.MODEL_DOESNT_EXIST.value.format(
-                model_version=model_version
-            ),
+            detail=ResponseMessage.MODEL_DOESNT_EXIST.value.format(model_version=model_version),
         )
+    model_id = model_query[0]
 
     target_zip_filepath = path.join(settings.data_dir, path.basename(file.filename))
 
@@ -134,7 +134,7 @@ async def evaluate(
         db,
         models.Evaluate,
         dict(
-            data=extracted_data_dir,
+            data=file.filename,
             output=str(score[1]),
             metrics=str(score[0]),
             operation_uuid=operation_record.operation_uuid,
@@ -148,20 +148,21 @@ async def evaluate(
 async def predict(
     model_version: str,
     file: UploadFile = File(
-        alias="training-file",
-        title="Training image dataset",
+        alias="test-file",
+        title="Prediction image",
     ),
     db: Session = Depends(get_db),
 ):
     """Predict api."""
-    model_id = get_model_id(db, model_version)
-    if not model_id:
+    model_query = get_model_id(db, model_version)
+    if not model_query:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=ResponseMessage.MODEL_DOESNT_EXIST.value.format(
                 model_version=model_version
             ),
         )
+    model_id = model_query[0]
     target_file = path.join(settings.data_dir, path.basename(file.filename))
 
     # Upload file

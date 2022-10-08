@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 from app.config import settings
 from app.datamodel.database import setup_db
-from app.routers.model import model_route
+from app.routers.modelling import model_route
 from app.routers.status import status_router
 
 app = FastAPI(title="Apple AI", docs_url=settings.app_prefix + "/docs")

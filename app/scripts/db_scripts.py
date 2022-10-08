@@ -1,4 +1,5 @@
 """File to store database operation functions"""
+from uuid import UUID
 
 from sqlalchemy.orm import Session
 
@@ -10,14 +11,14 @@ def get_model_id(db: Session, model_version: str):
     return (
         db.query(ImageModel.image_model_uuid)
         .filter_by(version=model_version)
-        .one_or_none()[0]
+        .one_or_none()
     )
 
 
-def get_model_class_map(db: Session, model_uuid: str):
+def get_model_class_map(db: Session, model_uuid: UUID):
     """Get target to index map for a model."""
     return (
-        db.query(ImageModel.class_map).filter_by(image_model_uuid=model_uuid).one()[0]
+        db.query(ImageModel.class_map).filter_by(image_model_uuid=str(model_uuid)).one()[0]
     )
 
 
