@@ -1,8 +1,7 @@
 from datetime import datetime
 from typing import Any
 
-from sqlalchemy import (Column, DateTime, ForeignKey, MetaData, String, func,
-                        text)
+from sqlalchemy import Column, DateTime, ForeignKey, MetaData, String, func, text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declarative_base
 

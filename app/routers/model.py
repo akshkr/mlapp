@@ -13,8 +13,14 @@ from app.constants import APIConstants, Operations, ResponseMessage
 from app.datamodel import crud, models
 from app.dependencies import get_db
 from app.scripts.db_scripts import get_model_class_map, get_model_id
-from app.scripts.learning import (create_model, evaluate_model, load_model,
-                                  make_prediction, save_model, train_model)
+from app.scripts.learning import (
+    create_model,
+    evaluate_model,
+    load_model,
+    make_prediction,
+    save_model,
+    train_model,
+)
 from app.utils import unzip_data
 
 model_route = APIRouter()

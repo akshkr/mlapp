@@ -1,0 +1,45 @@
+# VS Code files
+.vscode
+
+# pycharm files
+.idea
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# MAC Files
+.DS_Store
+
+# sphinx build directory
+docs/_build
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Pytest
+.pytest_cache
+pytest.log
+
+# Excel Files
+*.xlsx
+
+# Data folder
+data/

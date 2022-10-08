@@ -1,3 +1,5 @@
+"""Main application runner."""
+
 import os
 
 from fastapi import FastAPI

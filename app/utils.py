@@ -1,5 +1,7 @@
+"""Utility functions."""
+
 import zipfile
-from os import mkdir, path
+from os import path
 
 import requests
 
@@ -8,9 +10,11 @@ from app.constants import ModelConstants
 
 
 def download_data(filename: str) -> str:
+    """Download given file to data dir"""
     target_file = path.join(settings.data_dir, filename)
-    if path.isfile(filename):
+    if path.isfile(target_file):
         print("file already exists!")
+        return target_file
 
     file_to_download = requests.get(
         ModelConstants.PRETRAINED_WEIGHTS.value, stream=True
@@ -24,7 +28,8 @@ def download_data(filename: str) -> str:
     return target_file
 
 
-def unzip_data(file_path: str):
+def unzip_data(file_path: str) -> str:
+    """Unzip given filename to data dir."""
     with zipfile.ZipFile(file_path, "r") as zip_ref:
         zip_ref.extractall(settings.data_dir)
 

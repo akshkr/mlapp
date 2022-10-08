@@ -1,3 +1,5 @@
+"""Configuration management."""
+
 from os import environ
 from pathlib import Path
 from typing import Any, Optional
@@ -6,6 +8,7 @@ from pydantic import BaseSettings
 
 
 def get_env_var(key_name: str, data_type: Any, default: Optional[Any] = None):
+    """Get environment variable."""
     value = environ.get(key_name, default)
     if value is None:
         raise KeyError(f"{key_name} not set in environment variables.")
@@ -25,6 +28,8 @@ def get_env_var(key_name: str, data_type: Any, default: Optional[Any] = None):
 
 
 class Settings(BaseSettings):
+    """App settings."""
+
     app_prefix: str = "/api"
     app_base_url: str = get_env_var("APP_BASE_URL", str)
     database_url = "{dialect}://{user}:{password}@{host}/{database_name}".format(
