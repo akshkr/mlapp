@@ -13,7 +13,7 @@ status_router = APIRouter()
 
 
 @status_router.get("/metadata", response_model=List[MetadataResponse])
-async def get_metadata(
+def get_metadata(
     db: Session = Depends(get_db),
 ):
     """Get details of all the model versions present."""
@@ -21,7 +21,7 @@ async def get_metadata(
 
 
 @status_router.get("/history", response_model=List[HistoryResponse])
-async def get_history(
+def get_history(
     db: Session = Depends(get_db),
 ):
     """Get details of all the evaluation and prediction."""
